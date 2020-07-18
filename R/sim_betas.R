@@ -16,10 +16,10 @@
 #' @export
 sim_betas <- function(M, p, h2, maf_vec, prare, dist, ld){
   if (dist != "gaussian" & dist != "exponential" & dist != "laplace"){
-    print("Input for dist must be gaussian, or exponential, or laplace.")
+    stop("Input for dist must be gaussian, or exponential, or laplace.")
   }
   if (ld != "weak" & ld != "strong"){
-    print("Input for ld must be either weak or strong.")
+    stop("Input for ld must be either weak or strong.")
   }
   # Initialize effect sizes
   betas <- numeric(M) * 0
