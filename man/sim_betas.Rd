@@ -4,18 +4,27 @@
 \alias{sim_betas}
 \title{Generate effect sizes betas}
 \usage{
-sim_betas(M, m, h2, maf_vec, prare)
+sim_betas(M, p, h2, maf_vec, prare, dist, ld)
 }
 \arguments{
 \item{M}{the number of snps}
 
-\item{m}{the number of causal snps}
+\item{p}{the proportion of causal snps out of all snps}
 
 \item{h2}{heritability}
 
 \item{maf_vec}{the vector of MAF for all snps}
 
-\item{prare}{proportion of rare causal snps}
+\item{prare}{proportion of rare causal snps out of causal snps}
+
+\item{dist}{distribution of effect sizes, default is "gaussian".
+Options can be "gaussian", "exponential", "laplace".
+Note that LDpred simulates non-zero effect sizes from laplace distribution.}
+
+\item{ld}{linkage disequilibrium.
+Options can be "strong" or "weak".
+We simulate nearby snps together when ld is strong.
+We simulate snps evenly spread over all variants when ld is weak.}
 }
 \value{
 simulated betas of length M
