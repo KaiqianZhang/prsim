@@ -44,10 +44,10 @@ sim_betas <- function(M, p, h2, maf_vec, prare, dist, ld){
     causal_effects_common <- rnorm(m_common, mean=0, sd = sqrt(h2/m_common))
   } else if (dist == "exponential"){
     causal_effects_rare <- rexp(m_rare, rate=5)
-    causal_effects_common <- rnorm(m_common, rate=5)
+    causal_effects_common <- rexp(m_common, rate=5)
   } else if (dist == "laplace"){
     causal_effects_rare <- rlaplace(m_rare, m=0, s = sqrt(h2/m_rare))
-    causal_effects_common <- rnorm(m_common, m=0, s = sqrt(h2/m_common))
+    causal_effects_common <- rlaplace(m_common, m=0, s = sqrt(h2/m_common))
   }
   betas[causal_idx_rare] <- causal_effects_rare
   betas[causal_idx_common] <- causal_effects_common
