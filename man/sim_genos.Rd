@@ -2,9 +2,7 @@
 % Please edit documentation in R/sim_genos.R
 \name{sim_genos}
 \alias{sim_genos}
-\title{Generate genotypes for three populations YRI, CEU, and CHB.
-Note: to run this function, make sure system or terminal or cluster has commands stdpopsim, tskit, and plink2
-usually on the PC, make sure these commands have to be under /usr/local/bin}
+\title{Generate genotypes for three populations YRI, CEU, and CHB.}
 \usage{
 sim_genos(N_YRI, N_CEU, N_CHB, sim_label = 1)
 }
@@ -24,6 +22,4 @@ freq_stat: path for MAF frequency statistic summary
 }
 \description{
 Generate genotypes for three populations YRI, CEU, and CHB.
-Note: to run this function, make sure system or terminal or cluster has commands stdpopsim, tskit, and plink2
-usually on the PC, make sure these commands have to be under /usr/local/bin
 }

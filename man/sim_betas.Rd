@@ -4,7 +4,7 @@
 \alias{sim_betas}
 \title{Generate effect sizes betas}
 \usage{
-sim_betas(M, p, h2, maf_vec, prare, dist, ld)
+sim_betas(seed = 1234, M, p, h2, maf_vec, prare, dist, ld)
 }
 \arguments{
 \item{M}{the number of snps}

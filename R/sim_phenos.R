@@ -28,29 +28,37 @@
 #' @return a list of phenotypes for YRI (pheno_YRI), CEU (pheno_CEU), and CHB (pheno_CHB).
 #' @export
 
-sim_phenos <- function(sim_genos_res, chunk_size, cores_used, maf_vec,
+sim_phenos <- function(seed=1234, geno_mat, chunk_size, cores_used, af_vec,
                       N_YRI, N_CEU, N_CHB,
                       p_YRI, p_CEU, p_CHB,
                       h2_YRI, h2_CEU, h2_CHB,
                       prare_YRI, prare_CEU, prare_CHB,
                       dist, ld){
-  geno_path <- sim_geno_res[[1]]
-  maf_vec_path <- sim_genos_res[[2]]
-  geno_mat <- BEDMatrix(geno_path)
-  maf_vec <- read.delim(maf_vec_path)$ALT_FREQS
-  pheno_YRI <- sim_pheno_1pop("YRI", geno_mat, chunk_size, cores_used,
+
+  pheno_YRI_res <- sim_pheno_1pop(seed, "YRI", geno_mat, chunk_size, cores_used,
                               N_YRI, N_CEU, N_CHB,
-                              p_YRI, h2_YRI, maf_vec, prare_YRI, dist, ld)
-  pheno_CEU <- sim_pheno_1pop("CEU", geno_mat, chunk_size, cores_used,
+                              p_YRI, h2_YRI, af_vec, prare_YRI, dist, ld)
+  pheno_CEU_res <- sim_pheno_1pop(seed, "CEU", geno_mat, chunk_size, cores_used,
                               N_YRI, N_CEU, N_CHB,
-                              p_CEU, h2_CEU, maf_vec, prare_CEU, dist, ld)
-  pheno_CHB <- sim_pheno_1pop("CHB", geno_mat, chunk_size, cores_used,
+                              p_CEU, h2_CEU, af_vec, prare_CEU, dist, ld)
+  pheno_CHB_res <- sim_pheno_1pop(seed, "CHB", geno_mat, chunk_size, cores_used,
                               N_YRI, N_CEU, N_CHB,
-                              p_CHB, h2_CHB, maf_vec, prare_CHB, dist, ld)
+                              p_CHB, h2_CHB, af_vec, prare_CHB, dist, ld)
+
+  pheno_YRI <- pheno_YRI_res$phenos
+  pheno_CEU <- pheno_CEU_res$phenos
+  pheno_CHB <- pheno_CHB_res$phenos
+  beta_YRI <- pheno_YRI_res$betas
+  beta_CEU <- pheno_CEU_res$betas
+  beta_CHB <- pheno_CHB_res$betas
+
   return(list(
     pheno_YRI = pheno_YRI,
     pheno_CEU = pheno_CEU,
-    pheno_CHB = pheno_CHB
+    pheno_CHB = pheno_CHB,
+    beta_YRI = beta_YRI,
+    beta_CEU = beta_CEU,
+    beta_CHB = beta_CHB
   ))
 }
 

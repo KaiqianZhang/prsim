@@ -14,7 +14,8 @@
 #'           We simulate snps evenly spread over all variants when ld is weak.
 #' @return simulated betas of length M
 #' @export
-sim_betas <- function(M, p, h2, maf_vec, prare, dist, ld){
+sim_betas <- function(seed=1234, M, p, h2, maf_vec, prare, dist, ld){
+  set.seed(seed)
   if (dist != "gaussian" & dist != "exponential" & dist != "laplace"){
     stop("Input for dist must be gaussian, or exponential, or laplace.")
   }

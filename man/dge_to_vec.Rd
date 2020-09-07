@@ -2,12 +2,12 @@
 % Please edit documentation in R/sim_phenos_utils.R
 \name{dge_to_vec}
 \alias{dge_to_vec}
-\title{Helper functions for simulating phnotypes
+\title{Helper functions for simulating phenotypes
 Convert each dgeMatrix in the list into a vector}
 \usage{
 dge_to_vec(idx, y)
 }
 \description{
-Helper functions for simulating phnotypes
+Helper functions for simulating phenotypes
 Convert each dgeMatrix in the list into a vector
 }

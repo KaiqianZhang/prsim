@@ -6,6 +6,7 @@
 Simulate phenotypes for one specified population}
 \usage{
 sim_pheno_1pop(
+  seed,
   pop,
   geno_mat,
   chunk_size,

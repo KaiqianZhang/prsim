@@ -8,7 +8,7 @@ mul_chunk <- function(idx, chunk_size=100, beta, geno_mat, from, to){
   return(sparse_chunk %*% beta)
 }
 
-#' Helper functions for simulating phnotypes
+#' Helper functions for simulating phenotypes
 #' Convert each dgeMatrix in the list into a vector
 dge_to_vec <- function(idx, y){
   return(as.vector(y[[idx]]))
@@ -38,7 +38,7 @@ sim_E <- function(N, h2){
 
 #' Helper functions for simulating phnotypes
 #' Simulate phenotypes for one specified population
-sim_pheno_1pop<- function(pop, geno_mat, chunk_size, cores_used,
+sim_pheno_1pop<- function(seed, pop, geno_mat, chunk_size, cores_used,
                           N_YRI, N_CEU, N_CHB,
                           p, h2, maf_vec, prare, dist, ld){
   if (pop == "YRI"){
@@ -55,11 +55,10 @@ sim_pheno_1pop<- function(pop, geno_mat, chunk_size, cores_used,
     to <- N_YRI + N_CEU + N_CHB
   } else
   {stop("The input population should be either YRI, CEU, or CHB.")}
-
-  betas <- sim_betas(dim(geno_mat)[2], p, h2, maf_vec, prare, dist, ld)
+  betas <- sim_betas(seed, dim(geno_mat)[2], p, h2, maf_vec, prare, dist, ld)
   X <- mul_parallel(chunk_size, betas, geno_mat, from, to, cores_used)
   Z_X <- (X-mean(X))/sd(X)
   G <- sqrt(h2)*Z_X
   E <- sim_E(N, h2)
-  return(G+E)
+  return(list(phenos = G+E, betas=betas))
 }
