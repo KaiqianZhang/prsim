@@ -8,3 +8,12 @@ library(devtools)
 install_github("KaiqianZhang/prsim")
 ```
 
+- To add more functions and update (for author's notes):
+
+```
+load_all()
+document()
+install()
+library(prsim)
+```
+
