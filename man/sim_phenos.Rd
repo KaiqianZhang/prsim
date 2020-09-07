@@ -5,7 +5,7 @@
 \title{Generate phenotypes for three populations YRI, CEU, and CHB.}
 \usage{
 sim_phenos(
-  geno_mat,
+  sim_genos_res,
   chunk_size,
   cores_used,
   maf_vec,
@@ -26,10 +26,6 @@ sim_phenos(
 )
 }
 \arguments{
-\item{geno_mat}{a BEDMartix of
-dimension N (number of individuals from all three populations) by
-M (number of SNPs).}
-
 \item{chunk_size}{the size of chunk we perform matrix multiplication}
 
 \item{cores_used}{the number of cores used in parallel computing}
@@ -68,6 +64,10 @@ Note that LDpred simulates non-zero effect sizes from laplace distribution.}
 Options can be "strong" or "weak".
 We simulate nearby snps together when ld is strong.
 We simulate snps evenly spread over all variants when ld is weak.}
+
+\item{geno_mat}{a BEDMartix of
+dimension N (number of individuals from all three populations) by
+M (number of SNPs).}
 }
 \value{
 a list of phenotypes for YRI (pheno_YRI), CEU (pheno_CEU), and CHB (pheno_CHB).

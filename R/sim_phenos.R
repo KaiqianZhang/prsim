@@ -28,12 +28,16 @@
 #' @return a list of phenotypes for YRI (pheno_YRI), CEU (pheno_CEU), and CHB (pheno_CHB).
 #' @export
 
-sim_phenos <- function(geno_mat, chunk_size, cores_used, maf_vec,
+sim_phenos <- function(sim_genos_res, chunk_size, cores_used, maf_vec,
                       N_YRI, N_CEU, N_CHB,
                       p_YRI, p_CEU, p_CHB,
                       h2_YRI, h2_CEU, h2_CHB,
                       prare_YRI, prare_CEU, prare_CHB,
                       dist, ld){
+  geno_path <- sim_geno_res[[1]]
+  maf_vec_path <- sim_genos_res[[2]]
+  geno_mat <- BEDMatrix(geno_path)
+  maf_vec <- read.delim(maf_vec_path)$ALT_FREQS
   pheno_YRI <- sim_pheno_1pop("YRI", geno_mat, chunk_size, cores_used,
                               N_YRI, N_CEU, N_CHB,
                               p_YRI, h2_YRI, maf_vec, prare_YRI, dist, ld)
