@@ -18,7 +18,12 @@ library(prsim)
 
 - To install plink as a command line (for author's notes):
 ```
-brew tap brewsci/science
-brew install plink
+# download plink for mac
+# cd to plink.exe directory
+./plink
+# set plink as a command line
+cp ./plink /usr/local/bin
+# we can use plink now
+plink ...
 ```
 
