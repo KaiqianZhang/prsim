@@ -34,7 +34,7 @@ sim_genos <- function(N_YRI, N_CEU, N_CHB, sim_label=1){
   freq_stat <- paste0(prefix,"freq_stat")
   system(paste("plink2 --bfile", output, "--freq --out", freq_stat))
 
-  return(list(genos = output, af = freq_stat)) # note output and freq_stat are strings
+  return(list(genos = output, af = paste0(freq_stat,".afreq"))) # note output and freq_stat are strings
 }
 
 #res<- sim_genos(10, 10, 10)

@@ -26,6 +26,11 @@
 #'           We simulate nearby snps together when ld is strong.
 #'           We simulate snps evenly spread over all variants when ld is weak.
 #' @return a list of phenotypes for YRI (pheno_YRI), CEU (pheno_CEU), and CHB (pheno_CHB).
+#' @import dplyr
+#' @import tidyr
+#' @import parallel
+#' @import Matrix
+#' @import rmutil
 #' @export
 
 sim_phenos <- function(seed=1234, geno_mat, chunk_size, cores_used, af_vec,
@@ -51,14 +56,12 @@ sim_phenos <- function(seed=1234, geno_mat, chunk_size, cores_used, af_vec,
   beta_YRI <- pheno_YRI_res$betas
   beta_CEU <- pheno_CEU_res$betas
   beta_CHB <- pheno_CHB_res$betas
+  phenos <- c(pheno_YRI, pheno_CEU, pheno_CHB)
+  betas <- c(beta_YRI, beta_CEU, beta_CHB)
 
   return(list(
-    pheno_YRI = pheno_YRI,
-    pheno_CEU = pheno_CEU,
-    pheno_CHB = pheno_CHB,
-    beta_YRI = beta_YRI,
-    beta_CEU = beta_CEU,
-    beta_CHB = beta_CHB
+    phenos = phenos,
+    betas=betas
   ))
 }
 

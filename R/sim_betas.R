@@ -1,5 +1,6 @@
 #' Generate effect sizes betas
 #'
+#' @param seed random number seed
 #' @param M the number of snps
 #' @param p the proportion of causal snps out of all snps
 #' @param h2 heritability
@@ -50,7 +51,11 @@ sim_betas <- function(seed=1234, M, p, h2, maf_vec, prare, dist, ld){
     causal_effects_rare <- rlaplace(m_rare, m=0, s = sqrt(h2/m_rare))
     causal_effects_common <- rlaplace(m_common, m=0, s = sqrt(h2/m_common))
   }
-  betas[causal_idx_rare] <- causal_effects_rare
-  betas[causal_idx_common] <- causal_effects_common
+  if (m_rare != 0){
+    betas[causal_idx_rare] <- causal_effects_rare
+  }
+  if (m_common != 0){
+    betas[causal_idx_common] <- causal_effects_common
+  }
   return(betas)
 }

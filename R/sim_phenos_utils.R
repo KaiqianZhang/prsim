@@ -56,9 +56,14 @@ sim_pheno_1pop<- function(seed, pop, geno_mat, chunk_size, cores_used,
   } else
   {stop("The input population should be either YRI, CEU, or CHB.")}
   betas <- sim_betas(seed, dim(geno_mat)[2], p, h2, maf_vec, prare, dist, ld)
-  X <- mul_parallel(chunk_size, betas, geno_mat, from, to, cores_used)
-  Z_X <- (X-mean(X))/sd(X)
-  G <- sqrt(h2)*Z_X
-  E <- sim_E(N, h2)
-  return(list(phenos = G+E, betas=betas))
+  if (to > from){
+    X <- mul_parallel(chunk_size, betas, geno_mat, from, to, cores_used)
+    Z_X <- (X-mean(X))/sd(X)
+    G <- sqrt(h2)*Z_X
+    E <- sim_E(N, h2)
+    phenos <- G+E
+  } else {
+    phenos <- NULL
+  }
+  return(list(phenos = phenos, betas=betas))
 }

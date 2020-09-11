@@ -23,7 +23,9 @@
 #' @param chunk_size the size of chunk we perform matrix multiplication
 #' @param cores_used the number of cores used in parallel computing
 #' @return phenotypes for three populations and effect sizes for three populations
+#' @import BEDMatrix
 #' @export
+
 
 
 # https://www.r-bloggers.com/passing-arguments-to-an-r-script-from-command-lines/ set command line argument
@@ -46,21 +48,16 @@ main <- function(sim_label=1,
   af_path <- sim_genos_res$af
   af_vec <- read.delim(af_path)$ALT_FREQS
   # simulate phenotypes
-  sim_phenos_res <- sim_phenos(seed=1234, geno_mat, chunk_size, cores_used, af_vec,
+  sim_phenos_res <- sim_phenos(seed=sim_label, geno_mat, chunk_size, cores_used, af_vec,
                                N_YRI, N_CEU, N_CHB,
                                p_YRI, p_CEU, p_CHB,
                                h2_YRI, h2_CEU, h2_CHB,
                                prare_YRI, prare_CEU, prare_CHB,
                                dist, ld)
-  return(list(pheno_YRI = sim_phenos_res$pheno_YRI,
-              pheno_CEU = sim_phenos_res$pheno_CEU,
-              pheno_CHB = sim_phenos_res$pheno_CHB,
-              beta_YRI = sim_phenos_res$beta_YRI,
-              beta_CEU = sim_phenos_res$beta_CEU,
-              beta_CHB = sim_phenos_res$beta_CHB))
+  gwas_df <- perform_gwas(sim_phenos_res$phenos, sim_label, geno_path)
+  return(list(phenos=sim_phenos_res$phenos,
+              betas=sim_phenos_res$betas))
 }
-
-
 
 
 

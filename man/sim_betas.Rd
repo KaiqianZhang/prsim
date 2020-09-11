@@ -7,6 +7,8 @@
 sim_betas(seed = 1234, M, p, h2, maf_vec, prare, dist, ld)
 }
 \arguments{
+\item{seed}{random number seed}
+
 \item{M}{the number of snps}
 
 \item{p}{the proportion of causal snps out of all snps}
