@@ -1,6 +1,6 @@
 # prsim
 
-R package for simulations in RPS reaserch.
+R package for simulations in PRS reaserch.
 
 - To install:
 ```
